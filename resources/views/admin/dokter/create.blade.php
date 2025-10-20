@@ -11,9 +11,9 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
-                                        <label for="nama" class="form-label">Nama Dokter <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
-                                            name="nama" value="{{ old('nama') }}" required>
+                                        <label for="name" class="form-label">Nama Dokter <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                                            name="name" value="{{ old('name') }}" required>
                                         @error('nama')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror

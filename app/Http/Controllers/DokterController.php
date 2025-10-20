@@ -45,7 +45,7 @@ class DokterController extends Controller
         // dd($data);
 
         User::create([
-            'name' => $request->nama,
+            'name' => $request->name,
             'alamat' => $request->alamat,
             'no_ktp' => $request->no_ktp,
             'no_hp' => $request->no_hp,
