@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
 
 use App\Models\Poli;
 use Illuminate\Auth\Events\Validated;
@@ -29,7 +28,9 @@ class PoliController extends Controller
         ]);
 
         Poli::create($validated);
-        return redirect()->route('polis.index')->with('success', 'Poli berhasil di tambahkan')->with('type', 'success');
+        return redirect()->route('polis.index')
+        ->with('success', 'Data poli berhasil ditambahkan')
+        ->with('type', 'success');
     }
 
     public function edit($id)
@@ -47,13 +48,15 @@ class PoliController extends Controller
 
         $poli = Poli::findOrFail($id);
         $poli->update($validated);
-        return redirect()->route('polis.index')->with('success', 'Polis berhasil di update');
+        return redirect()->route('polis.index')
+        ->with('success', 'Data poli berhasil diubah');
     }
 
     public function destroy($id)
     {
         $poli = Poli::findOrFail($id);
         $poli->delete($poli);
-        return redirect()->route('polis.index')->with('success', 'Polis Berhasil di hapus !');
+        return redirect()->route('polis.index')
+        ->with('success', 'Data poli berhasil dihapus');
     }
 }

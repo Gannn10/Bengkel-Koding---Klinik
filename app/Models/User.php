@@ -9,12 +9,13 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable{
     protected $fillable = [
-    'name',
+    'nama',
     'alamat',
     'no_ktp',
+    'no_hp',
     'role',
     'email',
-    'id poli',
+    'id_poli',
     'password'
     ];
 
@@ -33,10 +34,10 @@ return[
 }
 
 public Function poli(){
-    return $this->belongsTo (Poli::class, 'id polt');
+    return $this->belongsTo (Poli::class, 'id_poli');
 }
 
 public function jadwalPeriksas(){
-    return $this->hasMany (JadwalPeriksa::class, 'id dokter');
+    return $this->hasMany (JadwalPeriksa::class, 'id_dokter');
     }
 }
