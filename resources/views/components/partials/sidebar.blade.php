@@ -80,7 +80,18 @@
                             </p>
                         </a>
                     </li> --}}
-                @endif
+
+       
+    <li class="nav-item">
+        <a href="{{ route('pasien.daftar') }}" class="nav-link {{ request()->routeIs('pasien.daftar') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-hospital-user"></i>
+            <p>
+                Poli
+            </p>
+        </a>
+    </li>
+@endif
+                
 
                 <!-- ROLE DOKTER -->
                 @if (request()->is('dokter*'))
@@ -92,7 +103,17 @@
                             </p>
                         </a>
                     </li>
+
+                      <li class="nav-item">
+                <a href="{{ route('jadwal-periksa.index') }}"
+                    class="nav-link {{ request()->routeIs('jadwal-periksa.*') ? 'active' : '' }}">
+                             <i class="nav-icon fas fa-calendar-check"></i>
+                        <p>Jadwal Periksa</p>
+                            </a>
+                    </li>
                 @endif
+              
+
 
                 <li class="nav-item ">
                     <form method="POST" action="/logout">

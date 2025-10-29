@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable{
     protected $fillable = [
-    'nama',
+    'name',
     'alamat',
     'no_ktp',
     'no_hp',
