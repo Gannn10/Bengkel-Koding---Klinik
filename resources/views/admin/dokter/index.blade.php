@@ -33,7 +33,7 @@
                         <tbody>
                             @forelse ($dokters as $dokter )
                                 <tr>
-                                    <td>{{ $dokter->nama }}</td>
+                                    <td>{{ $dokter->name }}</td>
                                     <td>{{ $dokter->email }}</td>
                                     <td>{{ $dokter->no_ktp }}</td>
                                     <td>{{ $dokter->no_hp }}</td>

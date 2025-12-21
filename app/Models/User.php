@@ -7,37 +7,43 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable{
+class User extends Authenticatable
+{
+    use HasFactory, Notifiable;
+    public $timestamps = false;
     protected $fillable = [
-    'name',
-    'alamat',
-    'no_ktp',
-    'no_hp',
-    'role',
-    'email',
-    'id_poli',
-    'password'
+        'name',
+        'alamat',
+        'no_ktp',
+        'no_hp',
+        'role',
+        'email',
+        'id_poli',
+        'password'
     ];
 
-protected $shidden =[
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-    'password',
-    'remember_token',
-];
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
 
-protected function casts(): array
-{
-return[
-    'email verified at' =>'datetime',
-    'password' => 'hashed',
-];
-}
+    // --- BAGIAN TAMBAHAN ---
 
-public Function poli(){
-    return $this->belongsTo (Poli::class, 'id_poli');
-}
+    public function poli()
+    {
+        return $this->belongsTo(Poli::class, 'id_poli');
+    }
 
-public function jadwalPeriksas(){
-    return $this->hasMany (JadwalPeriksa::class, 'id_dokter');
+    public function jadwalPeriksas()
+    {
+        return $this->hasMany(JadwalPeriksa::class, 'id_dokter');
     }
 }

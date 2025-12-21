@@ -24,7 +24,7 @@ class DokterController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'alamat' => 'required|string',
             'no_ktp' => 'required|string|max:16|unique:users,no_ktp',
             'no_hp' => 'required|string|max:15',
@@ -34,7 +34,7 @@ class DokterController extends Controller
         ]);
 
         User::create([
-            'nama' => $request->nama,
+            'name' => $request->name,
             'alamat' => $request->alamat,
             'no_ktp' => $request->no_ktp,
             'no_hp' => $request->no_hp,
@@ -58,7 +58,7 @@ class DokterController extends Controller
     public function update(Request $request, User $dokter)
     {
         $request->validate([
-            'nama' => 'required|string',
+            'name' => 'required|string',
             'email' => 'required|string|unique:users,email,' . $dokter->id,
             'no_ktp' => 'required|string|max:16|unique:users,no_ktp,' . $dokter->id,
             'no_hp' => 'required|string|max:15',
@@ -67,7 +67,7 @@ class DokterController extends Controller
         ]);
 
         $updateData = [
-            'nama' => $request->nama,
+            'nama' => $request->name,
             'email' => $request->email,
             'no_ktp' => $request->no_ktp,
             'no_hp' => $request->no_hp,

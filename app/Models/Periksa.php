@@ -7,19 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 class Periksa extends Model
 {
     protected $table = 'periksa';
+    
+    // WAJIB: Matikan timestamps agar tidak error saat simpan pemeriksaan
+    public $timestamps = false;
+
     protected $fillable = [
+        'id_daftar_poli',
+        'tgl_periksa',
+        'catatan',
+        'biaya_periksa'
+    ];
 
-'id_daftar_poli',
-'tgl_periksa',
-'catatan',
-'biaya_periksa'
-];
+    public function daftarPoli()
+    {
+        return $this->belongsTo(DaftarPoli::class, 'id_daftar_poli');
+    }
 
-public function daftarPoli(){
-    return $this->belongsTo (DaftarPoli::class, 'id_daftar_poli');
-}
-public function detailPeriksas(){
-    return $this->hasMany (DetailPeriksa::class, 'id_periksa');
-
-}
+    public function detailPeriksas()
+    {
+        return $this->hasMany(DetailPeriksa::class, 'id_periksa');
+    }
 }

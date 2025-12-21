@@ -3,46 +3,53 @@
 namespace App\Http\Controllers\Pasien;
 
 use App\Http\Controllers\Controller;
-use App\Models\DaftarPoli;
-use App\Models\JadwalPeriksa;
-use App\Models\Poli;
 use Illuminate\Http\Request;
+use App\Models\Poli;
+use App\Models\JadwalPeriksa;
+use App\Models\DaftarPoli;
 use Illuminate\Support\Facades\Auth;
 
 class PoliController extends Controller
 {
+    /**
+     * Menampilkan Halaman Daftar Poli
+     */
     public function get()
     {
+        // 1. Ambil Data User yang sedang login (untuk No RM dan ID Pasien)
         $user = Auth::user();
-        $polis = Poli::all();
-        $jadwal = JadwalPeriksa::with('dokter', 'dokter.poli')->get();
 
-        return view('pasien.daftar', [
-            'user' => $user,
-            'polis' => $polis,
-            'jadwals' => $jadwal,
-        ]);
+        // 2. Ambil Data Poli
+        $polis = Poli::all();
+
+        // 3. Ambil Data Jadwal beserta Relasi Dokter dan Polinya
+        // (PENTING: Harus ada relasi 'dokter.poli' agar JavaScript filter bekerja)
+        $jadwals = JadwalPeriksa::with(['dokter.poli'])->get(); 
+        return view('pasien.daftar', compact('user', 'polis', 'jadwals')); 
     }
 
     public function submit(Request $request)
     {
+        // Validasi Input
         $request->validate([
-            // 'id_poli' => 'required|exists:poli,id',
             'id_jadwal' => 'required|exists:jadwal_periksa,id',
-            'keluhan' => 'nullable|string',
-            'id_pasien' => 'required|exists:users,id',
+            'keluhan' => 'required|string',
         ]);
 
-        $jumlahSudahDaftar = DaftarPoli::where('id_jadwal', $request->id_jadwal)->count();
-        $daftar = DaftarPoli::create([
-            'id_pasien' => $request->id_pasiens,
-            'id_jadwal' => $request->id_jadwals,
+        // Cek No Antrian Terakhir 
+        $jumlahAntrian = DaftarPoli::where('id_jadwal', $request->id_jadwal)->count();
+        
+        // Nomor antrian baru
+        $noAntrianBaru = $jumlahAntrian + 1;
+
+        // Simpan ke Database
+        DaftarPoli::create([
+            'id_pasien' => Auth::id(),
+            'id_jadwal' => $request->id_jadwal,
             'keluhan' => $request->keluhan,
-            'no_antrian' => $jumlahSudahDaftar + 1,
+            'no_antrian' => $noAntrianBaru,
         ]);
 
-        // dd($daftar);
-
-        return redirect()->back()->with('message', 'Berhasil Mendaftar ke Poli')->with('type', 'success');
+        return redirect()->route('pasien.daftar')->with('message', 'Berhasil mendaftar! Nomor Antrian Anda: ' . $noAntrianBaru);
     }
 }

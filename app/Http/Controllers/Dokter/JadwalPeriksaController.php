@@ -31,7 +31,6 @@ class JadwalPeriksaController extends Controller
 
         JadwalPeriksa::create([
             'id_dokter' => Auth::id(),
-            // 'id_dokter' => Auth::id(),
             'hari' => $request->hari,
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai

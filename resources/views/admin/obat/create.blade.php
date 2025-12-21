@@ -48,6 +48,11 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3">
+                             <label for="stok" class="form-label">Stok Awal</label>
+                               <input type="number" class="form-control" name="stok" required value="0">
+                            </div>
+
                             <div class="form-group mt-4">
                                 <button type="submit" class="btn btn-success">
                                     <i class="fas fa-save"></i> Simpan

@@ -32,7 +32,7 @@
                         <tbody>
                             @forelse ($pasiens as $pasien )
                                 <tr>
-                                    <td>{{ $pasien->nama }}</td>
+                                    <td>{{ $pasien->name }}</td>
                                     <td>{{ $pasien->email }}</td>
                                     <td>{{ $pasien->no_ktp }}</td>
                                     <td>{{ $pasien->no_hp }}</td>

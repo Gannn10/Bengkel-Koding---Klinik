@@ -12,12 +12,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
-                                        <label for="nama" class="form-label">Nama pasien <span
+                                        <label for="name" class="form-label">Nama pasien <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                                            id="nama" name="nama" value="{{ old('nama', $pasien->nama) }}"
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            id="name" name="name" value="{{ old('name', $pasien->name) }}"
                                             required>
-                                        @error('nama')
+                                        @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>

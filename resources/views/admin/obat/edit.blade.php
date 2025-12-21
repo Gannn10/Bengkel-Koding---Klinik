@@ -46,6 +46,11 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3">
+                                <label for="stok" class="form-label">Stok</label>
+                                    <input type="number" class="form-control" name="stok" value="{{ $obat->stok }}" required>
+                            </div>
+
                             <div class="form-group mb-3">
                                 <button type="submit" class="btn btn-success">
                                     <i class="fas fa-save"></i> Update
